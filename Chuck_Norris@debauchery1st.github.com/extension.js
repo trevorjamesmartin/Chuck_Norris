@@ -40,7 +40,7 @@ const PopupMenu = imports.ui.popupMenu;
 // TODO: config - user selection of icon "style".
 // const ICON = 'norris';
 const ICON = 'norris-dark';
-const ICNDB_RANDOM = "http://api.icndb.com/jokes/random";
+const ICNDB_RANDOM = "http://api.icndb.com/jokes/random?exclude=explicit";
 
 const RoundHouseKick_Indicator = new Lang.Class({
     Name: 'RoundHouseKick.Indicator',
@@ -86,7 +86,7 @@ function set_text(item, text) {
 
 function chuck_foo() {
     // TODO: turn this into Soup
-    return wordWrap(JSON.parse(GLib.spawn_command_line_sync('curl '+ICNDB_RANDOM)[1].toString())['value']['joke'].replace(/&quot;/g, '\"'), 40);
+    return wordWrap(JSON.parse(GLib.spawn_command_line_sync('curl '+ICNDB_RANDOM)[1].toString())['value']['joke'].replace(/&quot;/g, '\"'), 60);
 }
 
 /*

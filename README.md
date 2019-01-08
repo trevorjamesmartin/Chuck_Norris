@@ -14,4 +14,4 @@ copy the plugin to your extensions folder
 
 restart the Gnome Shell (Alt-F2, r) or (log-out and then back in again)
 
-you can enable Chuck Norris using the Gnome Tweak Tool
+you can enable Chuck_Norris using the Gnome Tweak Tool

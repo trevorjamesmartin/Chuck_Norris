@@ -1,27 +1,49 @@
-const St = imports.gi.St;
-const Main = imports.ui.main;
-//const Soup = imports.gi.Soup;  TODO: make soup, not tsunamis
-const Lang = imports.lang;
-const GLib = imports.gi.GLib;
-const PanelMenu = imports.ui.panelMenu;
-const PopupMenu = imports.ui.popupMenu;
-//const ICON = 'norris';
-const ICON = 'norris-dark';
+/*
+
+    Chuck Norris gnome-shell-extension pulls information from ICNDB.com
+    Copyright (C) 2019  Trevor James Martin
+
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License along
+    with this program; if not, write to the Free Software Foundation, Inc.,
+    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+
+*/
+
 
 /*
  This extension was round-house-kicked out of my brain by Chuck Norris
 
-  Trevor Martin
+  Trevor James Martin
   trevor.j.martin@gmail.com
 
- many thanks to the author of the icndb api.
+ many thanks to the author of the icndb api, {your name and info go here}
 
-*/
+ */
 
+const St = imports.gi.St;
+const Main = imports.ui.main;
+// const Soup = imports.gi.Soup;  TODO: make soup, not tsunamis
+const Lang = imports.lang;
+const GLib = imports.gi.GLib;
+const PanelMenu = imports.ui.panelMenu;
+const PopupMenu = imports.ui.popupMenu;
+// TODO: config - user selection of icon "style".
+// const ICON = 'norris';
+const ICON = 'norris-dark';
 const ICNDB_RANDOM = "http://api.icndb.com/jokes/random";
 
 const RoundHouseKick_Indicator = new Lang.Class({
-    Name: 'RoundHouseKick.indicator',
+    Name: 'RoundHouseKick.Indicator',
     Extends: PanelMenu.Button,
 
        _init: function(){
@@ -29,39 +51,33 @@ const RoundHouseKick_Indicator = new Lang.Class({
            this.icon = new St.Icon({icon_name: ICON, style_class: 'system-status-icon'});
            this.actor.add_child(this.icon);
 
-           let label = new St.Label({text: 'iCNdb'});
-           this.actor.add_child(label);
-
            let menuItem = new PopupMenu.PopupMenuItem('!');
            menuItem.actor.connect('button-press-event', function(){
                Main.notify('Did you know?', chuck_foo())
            });
 
            this.menu.addMenuItem(menuItem);
-
        }
  });
 
+let rhk_indicator;
 
 function init(extensionMeta) {
     let theme = imports.gi.Gtk.IconTheme.get_default();
     theme.append_search_path(extensionMeta.path + "/icons");
-    log ('Chuck Norris initalized');
-};
+    log ('"I don\'t initiate violence, I retaliate." - Chuck Norris');
+}
 
 function enable() {
-     log ('Chuck Norris enabled');
-
-     let _indicator =  new RoundHouseKick_Indicator();
-     Main.panel._addToPanelBox('RoundHouseKick', _indicator, 1, Main.panel._rightBox);
-};
+     log ('Chuck Norris round-house kicks his way to the Gnome Desktop');
+     rhk_indicator =  new RoundHouseKick_Indicator();
+     Main.panel._addToPanelBox('RoundHouseKick', rhk_indicator, 1, Main.panel._rightBox);
+}
 
 function disable(){
-     log ('Chuck Norris disabled');
-
-     _indicator.destroy();
-};
-
+     log ('"Good morals lead to good laws." - Chuck Norris');
+     rhk_indicator.destroy();
+}
 
 function set_text(item, text) {
     item.actor.visible = Boolean(text);
@@ -69,13 +85,24 @@ function set_text(item, text) {
 }
 
 function chuck_foo() {
-    return JSON.parse(GLib.spawn_command_line_sync('curl '+ICNDB_RANDOM)[1].toString())['value']['joke'].replace(/&quot;/g, '\"');
-};
+    // TODO: turn this into Soup
+    return wordWrap(JSON.parse(GLib.spawn_command_line_sync('curl '+ICNDB_RANDOM)[1].toString())['value']['joke'].replace(/&quot;/g, '\"'), 40);
+}
 
+/*
+functions wordWrap+testWhite
+https://stackoverflow.com/questions/14484787/wrap-text-in-javascript
 
-// https://stackoverflow.com/questions/14484787/wrap-text-in-javascript
+I cleaned things up for the gnome-shell;
+  defining the variables in scope using 'let', rather than globally with 'var'.
+ */
+
 function wordWrap(str, maxWidth) {
-    var newLineStr = "\n"; done = false; res = '';
+    let i;
+    let found;
+    let newLineStr = "\n";
+    let done = false;
+    let res = '';
     do {
         found = false;
         // Inserts new line at first whitespace of the line
@@ -101,6 +128,6 @@ function wordWrap(str, maxWidth) {
 }
 
 function testWhite(x) {
-    var white = new RegExp(/^\s$/);
+    let white = new RegExp(/^\s$/);
     return white.test(x.charAt(0));
-};
+}

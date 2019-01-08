@@ -9,7 +9,7 @@ installation:
 copy the plugin to your extensions folder
 
 
-    cp -rp Chuck_Norris@debauchery1st.github.com/ ~/.local/share/gnome-shell/extensions/
+    cp -rp Chuck_Norris@debauchery1st.github.com ~/.local/share/gnome-shell/extensions
 
 
 restart the Gnome Shell (Alt-F2, r) or (log-out and then back in again)

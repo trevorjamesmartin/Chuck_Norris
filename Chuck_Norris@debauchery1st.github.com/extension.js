@@ -35,8 +35,7 @@ const Main = imports.ui.main;
 const Soup = imports.gi.Soup;
 const PanelMenu = imports.ui.panelMenu;
 const PopupMenu = imports.ui.popupMenu;
-// TODO: config - user selection of icon "style".
-// const ICON = 'norris';
+
 const ICON = 'norris-dark';
 const ICNDB_RANDOM = "http://api.icndb.com/jokes/random?exclude=explicit";
 
@@ -50,78 +49,71 @@ const RoundHouseKick_Indicator = new Lang.Class({
     Name: 'RoundHouseKick.Indicator',
     Extends: PanelMenu.Button,
 
-       _init: function(){
-           this.parent(0.0);
+    _init: function () {
+        this.parent(0.0);
 
-           _menuItem2 = new PopupMenu.PopupMenuItem('');
+        _menuItem2 = new PopupMenu.PopupMenuItem('');
 
-           this.joke_being_delivered = false;
+        this.joke_being_delivered = false;
 
-           _icon = new St.Icon({icon_name: ICON,
-               style_class: 'system-status-icon'});
+        _icon = new St.Icon({
+            icon_name: ICON,
+            style_class: 'system-status-icon'
+        });
 
-           this.actor.add_child(_icon);
+        this.actor.add_child(_icon);
 
-           let menuItem = new PopupMenu.PopupMenuItem('!');
+        let menuItem = new PopupMenu.PopupMenuItem('!');
 
-           menuItem.actor.connect('button-press-event', function (){
-               if (this.joke_being_delivered) {
-                   log('still waiting for the joke...');
-                   return;
-               }
-               this.joke_being_delivered = true;
+        menuItem.actor.connect('button-press-event', function () {
+            if (this.joke_being_delivered) {
+                log('still waiting for the joke...');
+                return;
+            }
+            this.joke_being_delivered = true;
 
-               set_text(_menuItem2, 'refreshing...');
-               let request = Soup.Message.new('GET', ICNDB_RANDOM);
-               httpSession.queue_message(request, Lang.bind(this, function (httpSession, message) {
-                   if (message.status_code === 200) {
-                       // parse json data
-                       let value = JSON.parse(message.response_body.data)['value'];
-                       let joke_raw = value['joke'].replace(/&quot;/g, '\"');
-                       let joke_wrapped = wordWrap(joke_raw, 60);
-                       set_text(_menuItem2, joke_wrapped);
-                       this.joke_being_delivered = false;
-                   }
-               }));
-           });
+            set_text(_menuItem2, 'refreshing...');
+            let request = Soup.Message.new('GET', ICNDB_RANDOM);
+            httpSession.queue_message(request, Lang.bind(this, function (httpSession, message) {
+                if (message.status_code === 200) {
+                    let value = JSON.parse(message.response_body.data)['value'];
+                    let joke_raw = value['joke'].replace(/&quot;/g, '\"');
+                    let joke_wrapped = wordWrap(joke_raw, 60);
+                    set_text(_menuItem2, joke_wrapped);
+                    this.joke_being_delivered = false;
+                }
+            }));
+        });
 
-           this.menu.addMenuItem(menuItem);
-           this.menu.addMenuItem(_menuItem2);
-       },
+        this.menu.addMenuItem(menuItem);
+        this.menu.addMenuItem(_menuItem2);
+    },
 
- });
+});
 
 let rhk_indicator;
 
 function init(extensionMeta) {
     let theme = imports.gi.Gtk.IconTheme.get_default();
     theme.append_search_path(extensionMeta.path + "/icons");
-    log ('"I don\'t initiate violence, I retaliate." - Chuck Norris');
+    log('"I don\'t initiate violence, I retaliate." - Chuck Norris');
 }
 
 function enable() {
-     log ('Chuck Norris round-house kicks his way to the Gnome Desktop');
-     rhk_indicator =  new RoundHouseKick_Indicator();
-     Main.panel._addToPanelBox('RoundHouseKick', rhk_indicator, 1, Main.panel._rightBox);
+    log('Chuck Norris round-house kicks his way to the Gnome Desktop');
+    rhk_indicator = new RoundHouseKick_Indicator();
+    Main.panel._addToPanelBox('RoundHouseKick', rhk_indicator, 1, Main.panel._rightBox);
 }
 
-function disable(){
-     log ('"Good morals lead to good laws." - Chuck Norris');
-     rhk_indicator.destroy();
+function disable() {
+    log('"Good morals lead to good laws." - Chuck Norris');
+    rhk_indicator.destroy();
 }
 
 function set_text(item, text) {
-    item.actor.visible = Boolean(text);
+    item.actor.visible = true;
     item.label.set_text(text);
 }
-
-/*
-functions wordWrap+testWhite
-https://stackoverflow.com/questions/14484787/wrap-text-in-javascript
-
-I cleaned things up for the gnome-shell;
-  defining the variables in scope using 'let', rather than globally with 'var'.
- */
 
 function wordWrap(str, maxWidth) {
     let i;

@@ -22,8 +22,10 @@ once enabled,
 
 click on Chuck's face to reveal a throw-down menu.
 
-![screenshot](screenshots/Screenshot%20from%202019-01-08%2017-17-40.png)
+![screenshot](screenshots/Screenshot%20from%202019-01-08%2021-27-34.png)
 
- 
 
-![screenshot](screenshots/Screenshot%20from%202019-01-08%2017-17-51.png)
+![screenshot](screenshots/Screenshot%20from%202019-01-08%2021-27-56.png)
+
+
+![screenshot](screenshots/Screenshot%20from%202019-01-08%2021-28-06.png)

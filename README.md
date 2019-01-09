@@ -1,6 +1,6 @@
 # Chuck_Norris
 
-Gnome shell extension
+GNOME shell extension
 
 *requires the Gnome 3 Desktop*
 
@@ -14,8 +14,8 @@ installation:
 
 -  restart the Gnome Shell (Alt-F2, r) or log-out and then back in again
 
--  open Tweak Tool to activate, deactivate, or uninstall the extension.
-
+-  you can enable and disable extensions on https://extensions.gnome.org/local/ 
+   or by owning open GNOME Tweak Tool.
 
 
 once enabled, 

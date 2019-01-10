@@ -5,7 +5,11 @@ GNOME shell extension
 *requires the Gnome 3 Desktop*
 
 ![screenshot](screenshots/Screenshot%20from%202019-01-09%2014-12-55.png)
+
+click on Chuck's face to reveal a throw-down menu.
+
 #
+
 installation:
 
 - generate the binary settings file for your local machine.
@@ -24,10 +28,8 @@ installation:
 
       or by opening your web browser to https://extensions.gnome.org/local/
 
+![screenshot](screenshots/Screenshot%20from%202019-01-10%2000-58-11.png)
 
-#
+- filter unwanted content from the configuration menu.
 
-once enabled, 
-
-click on Chuck's face to reveal a throw-down menu.
-
+![screenshot](screenshots/Screenshot%20from%202019-01-10%2000-58-16.png)

@@ -37,13 +37,32 @@ const PanelMenu = imports.ui.panelMenu;
 const PopupMenu = imports.ui.popupMenu;
 
 const ICON = 'norris-dark';
-const ICNDB_RANDOM = "http://api.icndb.com/jokes/random?exclude=explicit";
+const BASE_URL = "http://api.icndb.com/jokes/random?";
 
 let httpSession = new Soup.SessionAsync();
 Soup.Session.prototype.add_feature.call(httpSession, new Soup.ProxyResolverDefault());
 
 let _icon;
 let _menuItem2;
+
+const SETTINGS_NERDY_CONTENT = 'nerdy-content';
+const SETTINGS_EXPLICIT_CONTENT = 'explicit-content';
+
+let settings;
+
+const Gio = imports.gi.Gio;
+const Me = imports.misc.extensionUtils.getCurrentExtension();
+
+function loadSettings() {
+    const GioSSS = Gio.SettingsSchemaSource;
+    let schemaSource = GioSSS.new_from_directory(Me.path, GioSSS.get_default(), false);
+    let schemaObj = schemaSource.lookup(Me.metadata["settings-schema"], true);
+    if (!schemaObj) {
+        throw new Error ("Schema " + Me.metadata["settings-schema"] + " could not be found for extension " +
+                            Me.uuid + ". Please check your installation.");
+    }
+    settings = new Gio.Settings({settings_schema: schemaObj});
+}
 
 const RoundHouseKick_Indicator = new Lang.Class({
     Name: 'RoundHouseKick.Indicator',
@@ -70,10 +89,35 @@ const RoundHouseKick_Indicator = new Lang.Class({
                 log('still waiting for the joke...');
                 return;
             }
+
             this.joke_being_delivered = true;
 
+            let _nerdy = settings.get_boolean(SETTINGS_NERDY_CONTENT);
+            let _nsfw = settings.get_boolean(SETTINGS_EXPLICIT_CONTENT);
+
+            let _excluded = [];
+            let _args = "";
+
+            if (!_nsfw) {
+                log('excluding NSFW content');
+                _excluded.push("explicit")
+            }
+
+            if (!_nerdy) {
+                log('excluding nerdy jokes');
+                _excluded.push("nerdy")
+            }
+
+            if (_excluded.length > 0) {
+                log('building URL');
+                _args = "exclude=" + _excluded.toString();
+            }
+
+            let JOKE_URL = BASE_URL + _args;
+            log("REQUESTING "+ JOKE_URL);
             set_text(_menuItem2, 'refreshing...');
-            let request = Soup.Message.new('GET', ICNDB_RANDOM);
+
+            let request = Soup.Message.new('GET', JOKE_URL);
             httpSession.queue_message(request, Lang.bind(this, function (httpSession, message) {
                 if (message.status_code === 200) {
                     let value = JSON.parse(message.response_body.data)['value'];
@@ -97,6 +141,7 @@ function init(extensionMeta) {
     let theme = imports.gi.Gtk.IconTheme.get_default();
     theme.append_search_path(extensionMeta.path + "/icons");
     log('"I don\'t initiate violence, I retaliate." - Chuck Norris');
+    loadSettings();
 }
 
 function enable() {

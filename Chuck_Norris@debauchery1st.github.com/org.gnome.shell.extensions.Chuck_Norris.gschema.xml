@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<schemalist gettext-domain="Chuck_Norris">
+<schema path="/org/gnome/shell/extensions/Chuck_Norris/" id="org.gnome.shell.extensions.Chuck_Norris">
+    <key type="b" name="nerdy-content">
+        <default>true</default>
+        <summary>jokes for nerds</summary>
+        <description>Geeky tech-jokes included</description>
+    </key>
+    <key type="b" name="explicit-content">
+        <default>false</default>
+        <summary>"dirty jokes"</summary>
+        <description>These jokes are not appropriate for the 
+             public in general. They may not even be funny.</description>
+    </key>
+</schema>
+</schemalist>

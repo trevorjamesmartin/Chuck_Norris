@@ -47,8 +47,8 @@ function buildPrefsWidget() {
     grid.set_border_width(15);
     grid.attach(nerdyLabel, 0, 1, 1, 1);
     grid.attach(nerdySwitch, 1, 1, 1, 1);
-    grid.attach(nsfwLabel, 2, 1, 1, 1);
-    grid.attach(nsfwSwitch, 3, 1, 1, 1);
+    grid.attach(nsfwLabel, 0, 2, 1, 1);
+    grid.attach(nsfwSwitch, 1, 2, 1, 1);
     grid.show_all();
     return grid;
 }

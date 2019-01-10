@@ -47,11 +47,15 @@ let _menuItem2;
 
 const SETTINGS_NERDY_CONTENT = 'nerdy-content';
 const SETTINGS_EXPLICIT_CONTENT = 'explicit-content';
-
+const LOG_PREAMBLE = '[chuck norris] ';
 let settings;
 
 const Gio = imports.gi.Gio;
 const Me = imports.misc.extensionUtils.getCurrentExtension();
+
+function _log(message) {
+    log(LOG_PREAMBLE, message);
+}
 
 function loadSettings() {
     const GioSSS = Gio.SettingsSchemaSource;
@@ -86,7 +90,7 @@ const RoundHouseKick_Indicator = new Lang.Class({
 
         menuItem.actor.connect('button-press-event', function () {
             if (this.joke_being_delivered) {
-                log('still waiting for the joke...');
+                _log('still waiting for the joke...');
                 return;
             }
 
@@ -99,25 +103,24 @@ const RoundHouseKick_Indicator = new Lang.Class({
             let _args = "";
 
             if (!_nsfw) {
-                log('excluding NSFW content');
                 _excluded.push("explicit")
             }
 
             if (!_nerdy) {
-                log('excluding nerdy jokes');
                 _excluded.push("nerdy")
             }
 
             if (_excluded.length > 0) {
-                log('building URL');
                 _args = "exclude=" + _excluded.toString();
             }
 
             let JOKE_URL = BASE_URL + _args;
-            log("REQUESTING "+ JOKE_URL);
+
             set_text(_menuItem2, 'refreshing...');
 
             let request = Soup.Message.new('GET', JOKE_URL);
+
+            _log("REQUESTED "+ JOKE_URL);
             httpSession.queue_message(request, Lang.bind(this, function (httpSession, message) {
                 if (message.status_code === 200) {
                     let value = JSON.parse(message.response_body.data)['value'];
@@ -140,18 +143,18 @@ let rhk_indicator;
 function init(extensionMeta) {
     let theme = imports.gi.Gtk.IconTheme.get_default();
     theme.append_search_path(extensionMeta.path + "/icons");
-    log('"I don\'t initiate violence, I retaliate." - Chuck Norris');
+    _log('"I don\'t initiate violence, I retaliate." - Chuck Norris');
     loadSettings();
 }
 
 function enable() {
-    log('Chuck Norris round-house kicks his way to the Gnome Desktop');
+    _log('Chuck Norris round-house kicks his way to the GNOME Desktop');
     rhk_indicator = new RoundHouseKick_Indicator();
     Main.panel._addToPanelBox('RoundHouseKick', rhk_indicator, 1, Main.panel._rightBox);
 }
 
 function disable() {
-    log('"Good morals lead to good laws." - Chuck Norris');
+    _log('"Good morals lead to good laws." - Chuck Norris');
     rhk_indicator.destroy();
 }
 

@@ -30,6 +30,6 @@ installation:
 
 ![screenshot](screenshots/Screenshot%20from%202019-01-10%2000-58-11.png)
 
-- filter unwanted content from the configuration menu.
+- open the GNOME shell extension preferences to filter content by category.
 
 ![screenshot](screenshots/Screenshot%20from%202019-01-10%2000-58-16.png)

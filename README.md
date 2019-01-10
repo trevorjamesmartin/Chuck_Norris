@@ -20,7 +20,7 @@ installation:
 
       cp -rp Chuck_Norris@debauchery1st.github.com ~/.local/share/gnome-shell/extensions
 
--  restart the Gnome Shell (Alt-F2, r) or log-out and then back in again
+-  restart the GNOME Shell (Alt-F2, r) or log-out and then back in again
 
 -  you can enable and disable extensions with:
 

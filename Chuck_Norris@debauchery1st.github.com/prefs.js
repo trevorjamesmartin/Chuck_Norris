@@ -13,7 +13,7 @@ const LICENSE_BRIEF = '\nChuck Norris GNOME shell extension\n\n' +
     'this program comes with ABSOLUTELY NO WARRANTY.\n' +
     'This is free software, and you are welcome to redistribute it\n' +
     '<a href="https://www.gnu.org/licenses/old-licenses/gpl-2.0.html">See the ' +
-    'GNU General Pulic License, version 2 or later for details</a>';
+    'GNU General Public License, version 2 or later for details</a>';
 
 let settings;
 

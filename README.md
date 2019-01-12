@@ -32,4 +32,4 @@ installation:
 
 - open the GNOME shell extension preferences to filter content by category.
 
-![screenshot](screenshots/Screenshot%20from%202019-01-10%2000-58-16.png)
+![screenshot](screenshots/Screenshot%20from%202019-01-12%2000-15-09.png)

@@ -1,6 +1,6 @@
 /*
 
-    Chuck Norris gnome-shell-extension pulls information from ICNDB.com
+    Chuck Norris gnome-shell-extension (request a random joke from icndb.com)
     Copyright (C) 2019  Trevor James Martin
 
     This program is free software; you can redistribute it and/or modify
@@ -128,7 +128,11 @@ const RoundHouseKick_Indicator = new Lang.Class({
                     let joke_wrapped = wordWrap(joke_raw, 60);
                     set_text(_menuItem2, joke_wrapped);
                     this.joke_being_delivered = false;
+                } else {
+                    set_text(_menuItem2, "error " + message.status_code.toString());
+                    this.joke_being_delivered = false;
                 }
+
             }));
         });
 

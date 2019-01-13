@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+if ! test -d "./bin"; then
+  # create destination folder
+  mkdir ./bin
+fi
+
 echo "creating temporary folder"
 mkdir ./cn_tmp
 echo "copying files"

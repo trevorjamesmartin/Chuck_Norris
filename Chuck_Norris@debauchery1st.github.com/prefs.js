@@ -30,7 +30,7 @@ function init() {
 
 function buildPrefsWidget() {
     this._image = new Gtk.Image({
-        file: Me.path + "/icons/old/norris-lite.svg"
+        file: Me.path + "/icons/norris-lite.svg"
     });
     this._license = new Gtk.Label({
         xalign: true, label: ""});

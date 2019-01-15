@@ -4,7 +4,7 @@ GNOME shell extension
 
 *requires the Gnome 3 Desktop*
 
-![screenshot](screenshots/Screenshot%20from%202019-01-09%2014-12-55.png)
+![screenshot](screenshots/Screenshot%20from%202019-01-14%2020-24-46.png)
 
 click on Chuck's face to reveal a throw-down menu.
 
@@ -39,8 +39,8 @@ installation (manual installation):
 
 
 
-![screenshot](screenshots/Screenshot%20from%202019-01-10%2000-58-11.png)
+![screenshot](screenshots/Screenshot%20from%202019-01-14%2020-29-08.png)
 
 - open the GNOME shell extension preferences to filter content by category.
 
-![screenshot](screenshots/Screenshot%20from%202019-01-12%2000-15-09.png)
+![screenshot](screenshots/Screenshot%20from%202019-01-14%2020-18-55.png)

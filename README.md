@@ -2,6 +2,10 @@
 
 GNOME shell extension
 
+http://extensions.gnome.org/extension/1592/chuck-norris/
+
+
+
 *requires the Gnome 3 Desktop*
 
 ![screenshot](screenshots/Screenshot%20from%202019-01-14%2020-24-46.png)

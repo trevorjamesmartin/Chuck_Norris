@@ -13,9 +13,9 @@ http://extensions.gnome.org/extension/1592/chuck-norris/
 click on Chuck's face to reveal a throw-down menu.
 
 #
-linux one-liner
+GNU one-liner
 
-      git clone https://github.com/debauchery1st/Chuck_Norris.git;cd Chuck_Norris;python install.py;cd ..;rm -rf Chuck_Norris;echo "CLEANED"
+    git clone https://github.com/debauchery1st/Chuck_Norris.git;cd Chuck_Norris;python install.py;cd ..;rm -rf Chuck_Norris;echo "CLEANED"
 #
 
 installation (automatic)

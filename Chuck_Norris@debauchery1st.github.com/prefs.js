@@ -8,7 +8,7 @@ const SETTINGS_NERDY_CONTENT = 'nerdy-content';
 const SETTINGS_EXPLICIT_CONTENT = 'explicit-content';
 
 const LICENSE_BRIEF = '\nChuck Norris GNOME shell extension\n\n' +
-    'version '+ Me.version + '\n\n' +
+    'version '+ Me.metadata["version"] + '\n\n' +
     'jokes from <a href="http://www.icndb.com/">The Internet Chuck Norris Database</a>\n\n' +
     'this program comes with ABSOLUTELY NO WARRANTY.\n' +
     'This is free software, and you are welcome to redistribute it\n' +
